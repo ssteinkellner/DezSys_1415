@@ -37,18 +37,19 @@ public class KnockKnockProtocol {
 	private static final int SENTCLUE = 2;
 	private static final int ANOTHER = 3;
 
-    private static final int NUMJOKES = 5;
- 
-    private int state = WAITING;
-    private int currentJoke = 0;
- 
-    private String[] clues = { "Turnip", "Little Old Lady", "Atch", "Who", "Who" };
-    private String[] answers = { "Turnip the heat, it's cold in here!",
-                                 "I didn't know you could yodel!",
-                                 "Bless you!",
-                                 "Is there an owl in here?",
-                                 "Is there an echo in here?" };
-								 
+
+	private int state = WAITING;
+	private int currentJoke = 0;
+
+	private static String[] clues = {
+			"Doctor",
+			"Merry"};
+	private static String[] answers = {
+			"correct!",
+			"Merry Christmas"};
+	
+	private static final int NUMJOKES = clues.length;
+
 	public String processInput(String theInput) {
 		String theOutput = null;
 
