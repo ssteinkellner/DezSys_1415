@@ -46,9 +46,10 @@ public class KnockKnockClient {
 			System.exit(1);
 		}
 
-		String hostName = args[0];
-		int portNumber = Integer.parseInt(args[1]);
-
+		new KnockKnockClient().start(args[0], Integer.parseInt(args[1]));
+	}
+	
+	public void start(String hostName, int portNumber){
 		try (
 				Socket kkSocket = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);

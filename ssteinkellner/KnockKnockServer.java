@@ -39,14 +39,15 @@ import java.net.Socket;
 
 public class KnockKnockServer {
 	public static void main(String[] args) throws IOException {
-
 		if (args.length != 1) {
 			System.err.println("Usage: java KnockKnockServer <port number>");
 			System.exit(1);
 		}
-
-		int portNumber = Integer.parseInt(args[0]);
-
+		
+		new KnockKnockServer().start(Integer.parseInt(args[0]));
+	}
+	
+	public void start(int portNumber){
 		try (
 				ServerSocket serverSocket = new ServerSocket(portNumber);
 				Socket clientSocket = serverSocket.accept();
