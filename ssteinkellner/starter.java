@@ -10,7 +10,7 @@ public class starter {
 		if(args.length!=2){
 			System.err.println("Usage: java -jar <jarname>.jar -server <port>\n"
 							 + "   or: java -jar <jarname>.jar <hostName/IP> <port>");
-			System.exit(0);
+			System.exit(1);
 		}
 		
 		if(args[0].equalsIgnoreCase("-server")){

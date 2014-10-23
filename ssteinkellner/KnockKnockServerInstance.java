@@ -45,10 +45,17 @@ import java.net.Socket;
 public class KnockKnockServerInstance implements Runnable{
 	private int portNumber;
 	
+	/**
+	 * erstellt eine serverinstanz zur kommunikation
+	 * @param portnumber port zum kommunizieren
+	 */
 	public KnockKnockServerInstance(int portnumber){
 		this.portNumber = portnumber;
 	}
 	
+	/**
+	 * wartet auf nachrichten vom client und antwortet auf diese
+	 */
 	public void run(){
 		try (
 				ServerSocket serverSocket = new ServerSocket(portNumber);

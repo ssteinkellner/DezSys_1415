@@ -25,6 +25,11 @@ public class KnockKnockServer {
 		new KnockKnockServer().start(Integer.parseInt(args[0]));
 	}
 	
+	/**
+	 * startet den server
+	 * <br>wenn ein client sich verbindet wird ihm ein freier port zur kommunikation zugewiesen und eine serverinstanz auf diesem port gestartet
+	 * @param portNumber port für erste anfrage
+	 */
 	public void start(int portNumber){
 		try (
 				ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -34,6 +39,7 @@ public class KnockKnockServer {
 			lauf = true;
 			lastport = portNumber;
 			
+			//endlosschleife
 			while (lauf) {
 				try (
 					Socket clientSocket = serverSocket.accept();
@@ -41,10 +47,11 @@ public class KnockKnockServer {
 					BufferedReader in = new BufferedReader(
 							new InputStreamReader(clientSocket.getInputStream()));
 					){
-					if(in.readLine().equalsIgnoreCase("I need a port!")){
+					
+					if(in.readLine().equalsIgnoreCase("I need a port!")){	//diesen satz schreibt der client beim verbindungsaufbau
 						lastport++;
 						out.println(""+lastport);
-						new Thread(new KnockKnockServerInstance(lastport)).start();
+						new Thread(new KnockKnockServerInstance(lastport)).start();	//erstellt einen neuen thread, der mit dem client kommuniziert
 						System.out.println("New Client ("+clientSocket.getInetAddress()+") on Port "+lastport);
 					}
 				}catch (IOException e) {

@@ -46,15 +46,20 @@ public class KnockKnockClient {
 	public static void main(String[] args) throws IOException {
 
 		if (args.length != 2) {
-			System.err.println(
-					"Usage: java EchoClient <host name> <port number>");
+			System.err.println("Usage: java EchoClient <host name> <port number>");
 			System.exit(1);
 		}
 
 		new KnockKnockClient().start(args[0], Integer.parseInt(args[1]));
 	}
 	
+	/**
+	 * fragt den server auf dem angegebenen port nach einem freien port zum kommunizieren
+	 * @param hostName ip/domain des servers
+	 * @param portNumber port für erste anfrage
+	 */
 	public void start(String hostName, int portNumber){
+		//socket erstellen um server nach freiem port zu fragen
 		try (
 				Socket kkSocket = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
@@ -73,7 +78,8 @@ public class KnockKnockClient {
 					hostName);
 			System.exit(1);
 		}
-		
+
+		//socket erstellen um mit dem server zu kommunizieren
 		try (
 				Socket kkSocket = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
