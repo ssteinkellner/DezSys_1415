@@ -37,6 +37,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * die klasse stellt einen client dar
+ * @author SSteinkellner
+ * @version 20141020
+ */
 public class KnockKnockClient {
 	public static void main(String[] args) throws IOException {
 
@@ -50,6 +55,25 @@ public class KnockKnockClient {
 	}
 	
 	public void start(String hostName, int portNumber){
+		try (
+				Socket kkSocket = new Socket(hostName, portNumber);
+				PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
+				BufferedReader in = new BufferedReader(
+						new InputStreamReader(kkSocket.getInputStream()));
+			){
+			out.println("I need a port!");
+			String fromServer = in.readLine();
+			portNumber = Integer.parseInt(fromServer);
+			
+		} catch (UnknownHostException e) {
+			System.err.println("Don't know about host " + hostName);
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("Couldn't get I/O for the connection to " +
+					hostName);
+			System.exit(1);
+		}
+		
 		try (
 				Socket kkSocket = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
