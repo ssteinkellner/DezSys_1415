@@ -29,6 +29,8 @@ public class KnockKnockServer {
 		try (
 				ServerSocket serverSocket = new ServerSocket(portNumber);
 			){
+			System.out.println("Server started on Port "+portNumber);
+			
 			lauf = true;
 			lastport = portNumber;
 			
